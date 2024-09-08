@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Weather Forecast</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="more_info">More info</string>
+    <string name="details">details</string>
+    <string name="humidity">Humidity</string>
+    <string name="humidity_icon">humidity icon</string>
+    <string name="pressure">Pressure</string>
+    <string name="pressure_icon">pressure icon</string>
+    <string name="wind">Wind</string>
+    <string name="wind_icon">wind icon</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunset_icon">sunset icon</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunrise_icon">sunrise icon</string>
 </resources>
