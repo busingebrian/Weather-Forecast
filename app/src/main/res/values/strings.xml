@@ -13,4 +13,7 @@
     <string name="sunset_icon">sunset icon</string>
     <string name="sunrise">Sunrise</string>
     <string name="sunrise_icon">sunrise icon</string>
+    <string name="max">Max</string>
+    <string name="min">Min</string>
+    <string name="temp">°C</string>
 </resources>

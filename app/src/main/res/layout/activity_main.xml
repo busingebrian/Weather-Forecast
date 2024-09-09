@@ -10,16 +10,18 @@
 
     <RelativeLayout
         android:id="@+id/mainContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="375dp"
+        android:layout_height="599dp"
         android:visibility="visible">
+
 
         <LinearLayout
             android:id="@+id/addressContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="90dp">
 
             <TextView
                 android:id="@+id/text_view_address"
@@ -27,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                tools:text="Bweyogere, BD" />
+                tools:text="Bwoyogere, BD" />
 
             <TextView
                 android:id="@+id/text_view_updated_at"
@@ -37,7 +39,6 @@
                 android:textSize="14sp"
                 tools:text="20 April 2012, 20:08 PM" />
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/overviewContainer"
@@ -62,7 +63,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-thin"
                 android:textColor="@color/white"
-                android:textSize="90sp"
+                android:textSize="70sp"
                 tools:text="29°C" />
 
             <LinearLayout

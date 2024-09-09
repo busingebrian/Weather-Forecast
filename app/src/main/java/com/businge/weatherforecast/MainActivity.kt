@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -28,16 +29,24 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val REQUEST_LOCATION_CODE = 111
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    private lateinit var dateTextView: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        dateTextView = findViewById(R.id.text_view_updated_at)
+        val currentDate = getCurrentDate()
+        dateTextView.text = currentDate
+
         mFusedLocationClient =
+
             LocationServices.getFusedLocationProviderClient(this) // get lat and long coordinates
 
         if (!isLocationEnabled()) {
@@ -48,6 +57,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             requestPermissions()
         }
+    }
+
+    private fun getCurrentDate(): String {
+        val sdf = SimpleDateFormat("dd-mm-yyy, HH:mm a", Locale.getDefault())
+        return sdf.format(Date())
     }
 
     override fun onRequestPermissionsResult(
@@ -98,6 +112,18 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         val weather = response.body()
+                        for (i in weather!!.weather.indices) {
+                            findViewById<TextView>(R.id.text_view_sunset).text = convertTime(weather.sys.sunset.toLong())
+                            findViewById<TextView>(R.id.text_view_sunrise).text = convertTime(weather.sys.sunrise.toLong())
+                            findViewById<TextView>(R.id.text_view_status).text = weather.weather[i].description
+                            findViewById<TextView>(R.id.text_view_address).text = weather.name
+                            findViewById<TextView>(R.id.text_view_temp_max).text = weather.main.temp_max.toString() + " "+ getString(R.string.max)
+                            findViewById<TextView>(R.id.text_view_temp_min).text = weather.main.temp_min.toString() + " " + getString(R.string.min)
+                            findViewById<TextView>(R.id.text_view_temp).text = weather.main.temp.toString() +"°C"
+                            findViewById<TextView>(R.id.text_view_humidity).text = weather.main.humidity.toString()
+                            findViewById<TextView>(R.id.text_view_pressure).text = weather.main.pressure.toString()
+                            findViewById<TextView>(R.id.text_view_wind).text = weather.wind.speed.toString()
+                        }
                         Log.d("WEATHER", weather.toString())
 
                     } else {
@@ -110,13 +136,21 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<WeatherResponse>, error: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(this@MainActivity, "Sorry we have Internet Disruption at the moment", Toast.LENGTH_SHORT).show()
                 }
 
             })
         } else {
             Toast.makeText(this, "There is no internet connection", Toast.LENGTH_SHORT).show()
         }
+    }
+
+     private fun convertTime(time: Long): String {
+        val date = Date(time * 1000L)
+        val timeFormatted = SimpleDateFormat("HH:mm", Locale.UK)
+
+        timeFormatted.timeZone = TimeZone.getDefault()
+        return timeFormatted.format(date)
     }
 
     private fun isLocationEnabled(): Boolean {
