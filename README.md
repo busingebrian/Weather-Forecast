@@ -10,3 +10,5 @@ https://openweathermap.org/current
 
 To call the current weather data, use this
 https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={APIkey}
+
+The api key used above is generated from this page below https://home.openweathermap.org/api_keys 
