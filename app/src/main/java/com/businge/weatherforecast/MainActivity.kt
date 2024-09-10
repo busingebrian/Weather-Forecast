@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "There is no internet connection", Toast.LENGTH_SHORT).show()
         }
     }
-
+     /* formatting time to 24hrs */
      private fun convertTime(time: Long): String {
         val date = Date(time * 1000L)
         val timeFormatted = SimpleDateFormat("HH:mm", Locale.UK)
