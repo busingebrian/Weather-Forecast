@@ -117,9 +117,23 @@ class MainActivity : AppCompatActivity() {
                             findViewById<TextView>(R.id.text_view_sunrise).text = convertTime(weather.sys.sunrise.toLong())
                             findViewById<TextView>(R.id.text_view_status).text = weather.weather[i].description
                             findViewById<TextView>(R.id.text_view_address).text = weather.name
-                            findViewById<TextView>(R.id.text_view_temp_max).text = weather.main.temp_max.toString() + " "+ getString(R.string.max)
-                            findViewById<TextView>(R.id.text_view_temp_min).text = weather.main.temp_min.toString() + " " + getString(R.string.min)
-                            findViewById<TextView>(R.id.text_view_temp).text = weather.main.temp.toString() +"°C"
+                            findViewById<TextView>(R.id.text_view_temp_max).text =
+                                buildString {
+                                    append(weather.main.temp_max.toString())
+                                    append(" ")
+                                    append(getString(R.string.max))
+                                }
+                            findViewById<TextView>(R.id.text_view_temp_min).text =
+                                buildString {
+                                    append(weather.main.temp_min.toString())
+                                    append(" ")
+                                    append(getString(R.string.min))
+                                }
+                            findViewById<TextView>(R.id.text_view_temp).text =
+                                buildString {
+                                    append(weather.main.temp.toString())
+                                    append("°C")
+                                }
                             findViewById<TextView>(R.id.text_view_humidity).text = weather.main.humidity.toString()
                             findViewById<TextView>(R.id.text_view_pressure).text = weather.main.pressure.toString()
                             findViewById<TextView>(R.id.text_view_wind).text = weather.wind.speed.toString()
